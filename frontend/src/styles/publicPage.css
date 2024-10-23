@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+* {
+    font-family: "Nunito Sans", sans-serif;
+}
+
+.cuerpo {
+    display: flex;
+    justify-content: center;  /* Centra horizontalmente */
+    align-items: center;      /* Centra verticalmente */
+    height: 100vh;            /* La altura debe estar definida */
+    margin: 0;
+}
+
+.container-custom{
+    width: 800px; /* o el tamaño que quieras */
+    height: 350px; /* o el tamaño que quieras */
+    background-color: lightblue;
+    border-radius: 10px;
+    padding-top: 5px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.btn-custom {
+    position: absolute;
+    bottom: 40%;             /* Posiciona el botón en la parte inferior */
+    left: 50%;             /* Lo lleva al 50% horizontalmente */
+    transform: translateX(-50%);  /* Lo centra horizontalmente */
+    margin-bottom: 10px;
+    background-color: rgb(96, 139, 153);
+}
+
+.btn-custom:hover {
+    background-color: rgb(112, 154, 168);
+}
