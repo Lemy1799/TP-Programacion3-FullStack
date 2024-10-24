@@ -15,8 +15,9 @@ const PublicPage = () => {
   return (
     <div className='cuerpo'>
       <div className='container-custom'>
-        <h1>Bienvenido a nuestro proyecto FullStack</h1>
-        <button className='btn btn-custom' onClick={() => loginWithRedirect()}>Iniciar sesión</button>
+        <h1>Task Manager con React - Programacion 3</h1>
+        <h3>Emiliano Lerin - Analista en sistemas</h3>
+        <button className='btn btn-custom' onClick={() => loginWithRedirect()}>Log In</button>
       </div>
     </div>
   );
