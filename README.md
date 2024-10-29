@@ -11,23 +11,14 @@ Este es un proyecto fullstack que permite la gestión de tareas utilizando **Mon
 
 ## Configuración del backend
 
-### Base de Datos
-```bash
-DB_FULLSTACK='mongodb+srv://roairasca:rocio1234@tp3redes.q08xn.mongodb.net/fullStack-Prog3?retryWrites=true&w=majority'
-```
+### Base de Datos:
+MongoDB: (DB_FULLSTACK, Connection string de MongoDB)
 
-### Auth0
-```bash
-AUTH0_DOMAIN="dev-fl08rf2h5payxfcu.us.auth0.com"
-AUTH0_CLIENT_ID="wUxgyaXXJYJnZcFgwHnIr2bsltGzsEFL"
-AUTH0_CLIENT_SECRET="IxDrcGZI0JWiSuoWqUyTW0_l_c9PqdIWqze9dHbfjhUa0D_kRH2u5naczLqHv0pH"
-AUTH0_AUDIENCE="https://dev-fl08rf2h5payxfcu.us.auth0.com/api/v2/"
-```
+### Login:
+AuthZero: (AUTH0_DOMAIN, AUTH0_CLIENT_ID, AUTH0_CLIENT_SECRET y AUTH0_AUDIENCE; todo sacado desde la pagina de authzero)
 
 ### Servidor
-```bash
-PORT=4000
-```
+PORT: (a eleccion, solo en caso de desarrollo para cuando se usa localhost)
 
 ## Instalación
 
@@ -42,6 +33,7 @@ npm install
 ```
 
 3. **Configurar las variables de entorno en un .env**:
+(cada carpeta, back y front, tienen un .env separado)
 
 4. **Iniciar el servidor**:
 ```bash
@@ -51,10 +43,8 @@ node index.js
 ## Configuración del frontend
 
 ### Auth0 Config
-```bash
-REACT_APP_AUTH0_DOMAIN="dev-fl08rf2h5payxfcu.us.auth0.com"
-REACT_APP_AUTH0_CLIENT_ID="wUxgyaXXJYJnZcFgwHnIr2bsltGzsEFL"
-```
+REACT_APP_AUTH0_DOMAIN=(va lo mismo que en AUTH0_DOMAIN)
+REACT_APP_AUTH0_CLIENT_ID=(va lo mismo que en AUTH0_CLIENT_ID)
 
 ## Instalación
 
