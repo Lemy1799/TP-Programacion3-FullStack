@@ -5,7 +5,7 @@ const Task = require("../../models/task");
 require('dotenv').config();
 
 //abr k sale
-const jwt = require("express-jwt");
+const { expressjwt: jwt } = require("express-jwt");
 const jwksRsa = require("jwks-rsa");
 //----------
 
