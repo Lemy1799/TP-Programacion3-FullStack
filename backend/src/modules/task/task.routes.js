@@ -2,20 +2,36 @@ const express = require("express");
 const taskService = require("./task.service");
 const {paginated} = require("./task.service");
 const Task = require("../../models/task");
+require('dotenv').config();
+
+//abr k sale
+const jwt = require("express-jwt");
+const jwksRsa = require("jwks-rsa");
+//----------
 
 const router = express.Router();
 
-router.get('/api/task/:name', async (req, res) => {
-  const {name} = req.params;
-  const { page = 0, perPage = 10, sort = {} } = req.query;
+//abr k sale pt2
+const checkJwt = jwt({
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
+  }),
+  audience: process.env.AUTH0_AUDIENCE,
+  issuer: `https://${process.env.AUTH0_DOMAIN}/`,
+  algorithms: ["RS256"]
+});
+//--------------
 
-  if (!name) {
-    return res.status(400).send({ message: 'Username es requerido' });
-  }
+router.get('/api/task', checkJwt, async (req, res) => {
+  const userId = req.user.sub; // Claim 'sub' del token de Auth0
+  const { page = 0, perPage = 10, sort = {} } = req.query;
 
   try {
     const tasks = await paginated({
-      filter: { user: name, completed: false },
+      filter: { user: userId, completed: false },
       page: Number(page),
       perPage: Number(perPage),
       sort: typeof sort === 'string' ? JSON.parse(sort) : sort,
@@ -29,10 +45,11 @@ router.get('/api/task/:name', async (req, res) => {
 });
 
 // POST /api/task
-router.post('/api/task', async (req, res) => {
+router.post('/api/task', checkJwt, async (req, res) => {
   try {
-    const { name, description, user } = req.body;
-    const newTask = new Task({ name, description, user });
+    const { name, description } = req.body;
+    const userId = req.user.sub;
+    const newTask = new Task({ name, description, user: userId });
     await newTask.save();
     res.status(201).send(newTask);
   } catch (error) {
@@ -42,7 +59,7 @@ router.post('/api/task', async (req, res) => {
 });
 
 // PUT /api/task/:id
-router.put("/api/task/:id",  async (req, res) => {
+router.put("/api/task/:id", checkJwt, async (req, res) => {
   // #swagger.tags = ['Task']
   // #swagger.description = 'Actualizar una tarea existente'
   // #swagger.parameters['id'] = { description: 'ID de la tarea a actualizar' }
@@ -64,7 +81,7 @@ router.put("/api/task/:id",  async (req, res) => {
   }
 });
 
-router.patch("/api/task/:id", async (req, res) => {
+router.patch("/api/task/:id", checkJwt, async (req, res) => {
   // #swagger.tags = ['Task']
   // #swagger.description = 'Actualizar el estado de una tarea a completada'
   // #swagger.parameters['id'] = { description: 'ID de la tarea a actualizar' }
